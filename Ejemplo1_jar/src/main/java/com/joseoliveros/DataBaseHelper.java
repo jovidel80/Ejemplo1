@@ -8,7 +8,7 @@ import java.util.List;
 public class DataBaseHelper<T> {
 
     private final String DRIVER = "com.mysql.jdbc.Driver";
-    private final String URL = "jdbc:mysql://localhost/arquitecturajava";
+    private final String URL = "jdbc:mysql://127.0.0.1:3306/arquitecturajava";
     private final String USUARIO = "root";
     private final String CLAVE = "root";
 
