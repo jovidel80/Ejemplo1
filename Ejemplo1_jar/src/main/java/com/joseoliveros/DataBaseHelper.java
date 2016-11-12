@@ -60,8 +60,8 @@ public class DataBaseHelper<T> {
                 T objeto = (T) Class.forName(clase.getName()).newInstance();
                 Method[] metodos = objeto.getClass().getDeclaredMethods();
                 for (int i=0;i<metodos.length;i++) {
-                    if (metodos[i].getName().startsWith("set") ) { metodos[i].invoke(objeto,
-                            filas.getString(metodos[i].getName().substring(3)));
+                    if (metodos[i].getName().startsWith("set") ) {
+                        metodos[i].invoke(objeto, filas.getString(metodos[i].getName().substring(3)));
                     }
                     if (objeto.getClass().getName().equals("java.lang.String")) {
                         objeto=(T)filas.getString(1);
