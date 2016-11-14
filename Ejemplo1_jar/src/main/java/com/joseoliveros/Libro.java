@@ -81,8 +81,7 @@ public class Libro {
     }
 
     public void salvar() {
-        String consultaSQL = "update Libros set titulo='"+ this.titulo + ", " +
-                "categoria='"+ categoria+"' where isbn='"+ isbn+"'";
+        String consultaSQL = "UPDATE `arquitecturajava`.`libros` SET `titulo`='"+ this.titulo + "', `categoria`='"+ this.categoria + "' WHERE `isbn`='"+this.isbn+"';";
         DataBaseHelper<Libro> helper = new DataBaseHelper<Libro>();
         helper.modificarResgistro(consultaSQL);
     }

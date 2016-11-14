@@ -13,7 +13,9 @@
 %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Editar Libro</title>
+    <link rel="stylesheet" type="text/css" href="css/formato.css">
+    <script type="text/javascript" src="js/validacion.js"></script>
 </head>
 <body>
 <form action="SalvarLibro.jsp" id="formularioEdicion">
@@ -21,16 +23,15 @@
         <legend>Formulario alta libro</legend>
         <p>
             <label for="isbn">ISBN:</label>
-            <input type="text" id="isbn" name="isbn" value="<%=libro.getIsbn()%>">
+            <input type="text" id="isbn" name="isbn" value="<%=libro.getIsbn()%>" readonly="readonly">
         </p>
         <p>
             <label for="titulo">Título:</label>
-            <input type="text" id="titulo" name="titulo" value="<%=libro.getCategoria()%>">
+            <input type="text" id="titulo" name="titulo" value="<%=libro.getTitulo()%>">
         </p>
         <p>
             <label for="categoria">Categoría:</label>
-            <input type="text" id="categoria" name="categoria" value="<%=libro.getCategoria()%>">
-        <select name="categoria">
+        <select name="categoria" id="categoria">
         <%
             for (String categoria : listaDeCategorias) {
                 if (libro.getCategoria().equals(categoria)) { %>
