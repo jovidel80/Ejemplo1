@@ -1,17 +1,21 @@
 package com.joseoliveros.pruebas;
 
-import com.joseoliveros.Libro;
-
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 
-public class Test<T> {
+@SuppressWarnings("ALL")
+public class Test {
 
     public void hacerAlgo() throws Exception {
 
-        T obj = (T) Class.forName(Libro.class.getName()).newInstance();
-        Method[] metodos = obj.getClass().getDeclaredMethods();
-        for (Method method : metodos) {
-            System.out.println(method.getName());
+        String s = "hola";
+        Method[] methods = s.getClass().getDeclaredMethods();
+        for (Method method : methods) {
+            System.out.println("metodo: " + method.getName());
+            Parameter[] parameters = method.getParameters();
+            for (Parameter parameter : parameters) {
+                System.out.println(parameter.toString());
+            }
         }
     }
 }

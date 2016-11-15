@@ -26,9 +26,9 @@
         <module name="Ejemplo1_webapp" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.8">
       <module name="Ejemplo1" target="1.5" />
-      <module name="Ejemplo1_jar" target="1.5" />
+      <module name="Ejemplo1_jar" target="1.7" />
       <module name="Ejemplo1_webapp" target="1.5" />
     </bytecodeTargetLevel>
   </component>
