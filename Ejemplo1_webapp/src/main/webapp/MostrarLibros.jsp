@@ -1,5 +1,6 @@
 <%@ page import="com.joseoliveros.Libro" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.joseoliveros.DataBaseException" %>
 <%--
   Created by IntelliJ IDEA.
   User: capitanjovi
@@ -13,6 +14,7 @@
     <title>Lista de Libros</title>
 </head>
 <body>
+<form name="filtroCategoria">
 <select name="categoria">
     <option value="seleccionar">Seleccionar</option>
     <%
@@ -23,10 +25,23 @@
     </option>
     <% } %>
 </select>
-<br>
+    <input type="submit" value="Filtrar">
+</form>
 <%
     List<Libro> listaDeLibros = null;
-    listaDeLibros = Libro.buscarTodos();
+    if (request.getParameter("categoria") == null || request.getParameter("categoria").equals("seleccionar")) {
+        try {
+            listaDeLibros = Libro.buscarTodos();
+        } catch (DataBaseException e) {
+            e.printStackTrace();
+        }
+    } else {
+        try {
+            listaDeLibros = Libro.buscarPorCategoria(request.getParameter("categoria"));
+        } catch (DataBaseException e) {
+            e.printStackTrace();
+        }
+    }
     for (Libro libro : listaDeLibros) { %>
 <%=libro.getIsbn()%> -
 <%=libro.getTitulo()%> -

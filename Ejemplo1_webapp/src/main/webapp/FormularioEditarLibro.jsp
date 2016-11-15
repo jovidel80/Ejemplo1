@@ -1,5 +1,6 @@
 <%@ page import="com.joseoliveros.Libro" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="com.joseoliveros.DataBaseException" %><%--
   Created by IntelliJ IDEA.
   User: Joliveros
   Date: 07/11/2016
@@ -8,7 +9,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    Libro libro = Libro.buscarPorClave(request.getParameter("isbn"));
+    Libro libro = null;
+    try {
+        libro = Libro.buscarPorClave(request.getParameter("isbn"));
+    } catch (DataBaseException e) {
+        e.printStackTrace();
+    }
     List<String> listaDeCategorias = Libro.buscarTodasLasCategoria();
 %>
 <html>

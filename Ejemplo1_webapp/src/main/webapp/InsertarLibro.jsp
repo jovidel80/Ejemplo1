@@ -7,16 +7,23 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.joseoliveros.Libro" %>
+<%@ page import="com.joseoliveros.DataBaseException" %>
 
 <%
-    String isbn = request.getParameter("isbn");
-    String titulo = request.getParameter("titulo");
-    String categoria = request.getParameter("categoria");
+    try {
+        String isbn = request.getParameter("isbn");
+        String titulo = request.getParameter("titulo");
+        String categoria = request.getParameter("categoria");
 
-    Libro libro = new Libro(isbn, titulo, categoria);
-    libro.insertar();
+        Libro libro = new Libro(isbn, titulo, categoria);
+        libro.insertar();
 
-    response.sendRedirect("MostrarLibros.jsp");
+        response.sendRedirect("MostrarLibros.jsp");
+    } catch (DataBaseException e) { %>
+<%=e.getMessage()%>
+<%=e.getCause().getMessage()%>
+<% } %>
+
 %>
 <html>
 <head>

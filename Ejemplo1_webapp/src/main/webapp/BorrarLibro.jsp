@@ -1,4 +1,5 @@
-<%@ page import="com.joseoliveros.Libro" %><%--
+<%@ page import="com.joseoliveros.Libro" %>
+<%@ page import="com.joseoliveros.DataBaseException" %><%--
   Created by IntelliJ IDEA.
   User: capitanjovi
   Date: 6/11/16
@@ -8,10 +9,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    String isbn = request.getParameter("isbn");
-    Libro libro = new Libro(isbn);
-    libro.borrar();
-    response.sendRedirect("MostrarLibros.jsp");
+    try {
+        String isbn = request.getParameter("isbn");
+        Libro libro = new Libro(isbn);
+        libro.borrar();
+        response.sendRedirect("MostrarLibros.jsp");
+    } catch (DataBaseException e) {
+        e.printStackTrace();
+    }
 %>
 <html>
 <head>
