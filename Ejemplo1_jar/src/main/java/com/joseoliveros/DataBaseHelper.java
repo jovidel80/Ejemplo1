@@ -1,7 +1,5 @@
 package com.joseoliveros;
 
-import javafx.scene.chart.PieChart;
-
 import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,7 +12,7 @@ public class DataBaseHelper<T> {
     private final String USUARIO = "root";
     private final String CLAVE = "root";
 
-    public int modificarResgistro(String consultaSQL) throws DataBaseException {
+    public int modificarResgistro(String consultaSQL) {
         Connection conexion = null;
         Statement sentencia = null;
         int filasAfectadas = 0;
@@ -26,7 +24,7 @@ public class DataBaseHelper<T> {
             filasAfectadas = sentencia.executeUpdate(consultaSQL);
         } catch (ClassNotFoundException e) {
             System.out.println("Error cargando el driver: " + e.getMessage());
-            throw new DataBaseException("Clase no encontrada", e);
+            throw new DataBaseException("Error de SQL: ", e);
         } catch (SQLException e) {
             System.out.println("Error de SQL" + e.getMessage());
             throw new DataBaseException("Error de SQL", e);

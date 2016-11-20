@@ -1,6 +1,5 @@
 <%@ page import="com.joseoliveros.Libro" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.joseoliveros.DataBaseException" %>
 <%--
   Created by IntelliJ IDEA.
   User: capitanjovi
@@ -30,17 +29,9 @@
 <%
     List<Libro> listaDeLibros = null;
     if (request.getParameter("categoria") == null || request.getParameter("categoria").equals("seleccionar")) {
-        try {
-            listaDeLibros = Libro.buscarTodos();
-        } catch (DataBaseException e) {
-            e.printStackTrace();
-        }
-    } else {
-        try {
+        listaDeLibros = Libro.buscarTodos();
+    } else{
             listaDeLibros = Libro.buscarPorCategoria(request.getParameter("categoria"));
-        } catch (DataBaseException e) {
-            e.printStackTrace();
-        }
     }
     for (Libro libro : listaDeLibros) { %>
 <%=libro.getIsbn()%> -

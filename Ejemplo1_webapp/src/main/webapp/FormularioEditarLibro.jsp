@@ -10,11 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Libro libro = null;
-    try {
         libro = Libro.buscarPorClave(request.getParameter("isbn"));
-    } catch (DataBaseException e) {
-        e.printStackTrace();
-    }
     List<String> listaDeCategorias = Libro.buscarTodasLasCategoria();
 %>
 <html>

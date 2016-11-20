@@ -10,7 +10,6 @@
 <%@ page import="com.joseoliveros.DataBaseException" %>
 
 <%
-    try {
         String isbn = request.getParameter("isbn");
         String titulo = request.getParameter("titulo");
         String categoria = request.getParameter("categoria");
@@ -19,10 +18,6 @@
         libro.insertar();
 
         response.sendRedirect("MostrarLibros.jsp");
-    } catch (DataBaseException e) { %>
-<%=e.getMessage()%>
-<%=e.getCause().getMessage()%>
-<% } %>
 
 %>
 <html>
