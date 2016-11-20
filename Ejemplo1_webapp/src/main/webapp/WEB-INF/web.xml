@@ -4,9 +4,33 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
-  
+  <servlet>
+    <servlet-name>ControladorLibros</servlet-name>
+    <servlet-class>com.joseoliveros.aplicacion.ControladorLibros</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ServletTest</servlet-name>
+    <servlet-class>com.joseoliveros.aplicacion.ServletTest</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>HomePageServlet</servlet-name>
+    <servlet-class>com.joseoliveros.aplicacion.HomePageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControladorLibros</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ServletTest</servlet-name>
+    <url-pattern>*.hacer</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HomePageServlet</servlet-name>
+    <url-pattern>home.home</url-pattern>
+  </servlet-mapping>
+
   <welcome-file-list>
-    <welcome-file>FormularioInsertarLibro.jsp</welcome-file>
+    <welcome-file>home.home</welcome-file>
   </welcome-file-list>
 
   <error-page>

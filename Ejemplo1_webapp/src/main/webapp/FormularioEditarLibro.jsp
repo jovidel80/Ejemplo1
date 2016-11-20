@@ -20,7 +20,7 @@
     <script type="text/javascript" src="js/validacion.js"></script>
 </head>
 <body>
-<form action="SalvarLibro.jsp" id="formularioEdicion">
+<form action="SalvarLibro.do" id="formularioEdicion">
     <fieldset>
         <legend>Formulario alta libro</legend>
         <p>

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: capitanjovi
   Date: 6/11/16
@@ -15,7 +15,7 @@
     <script type="text/javascript" src="js/validacion.js"></script>
 </head>
 <body>
-<form action="InsertarLibro.jsp" id="miformulario" onsubmit="return validacion()">
+<form action="InsertarLibro.do" id="miformulario" onsubmit="return validacion()">
     <fieldset>
         <legend>Formulario Alta Libro</legend>
         <p>
@@ -28,12 +28,21 @@
         </p>
         <p>
             <label for="categoria">Categoría:</label>
-            <input type="text" id="categoria" name="categoria">
+            <select name="categoria" id="categoria">
+                <%
+                    List<String> listaDeCategorias = (List<String>) request.getAttribute("listaDeCategorias");
+                    for (String categoria : listaDeCategorias) { %>
+                <option value="<%=categoria%>"><%=categoria%></option>
+                    <% }
+                %>
+            </select>
         </p>
         <p>
             <input type="submit" value="Insertar">
         </p>
     </fieldset>
+    <br>
+    <a href="/MostrarLibros.do"><input type="button" value="Mostrar Libros"></a>
 </form>
 </body>
 </html>

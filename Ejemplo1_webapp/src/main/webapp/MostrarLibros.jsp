@@ -13,35 +13,33 @@
     <title>Lista de Libros</title>
 </head>
 <body>
-<form name="filtroCategoria">
+<form name="filtroCategoria" action="filtrar.do">
 <select name="categoria">
     <option value="seleccionar">Seleccionar</option>
     <%
         List<String> listaDeCategorias = null;
-        listaDeCategorias = Libro.buscarTodasLasCategoria();
-        for (String categoria : listaDeCategorias) { %>
-    <option value="<%=categoria%>"><%=categoria%>
-    </option>
-    <% } %>
+        listaDeCategorias = (List<String>) request.getAttribute("listaDeCategorias");
+        for (String categoria : listaDeCategorias) {
+    if (categoria.equals(request.getParameter("categoria"))) { %>
+    <option value="<%=categoria%>"><%=categoria%></option>
+    <% } else { %>
+    <option value="<%=categoria%>"><%=categoria%></option>
+    <%}
+        }%>
 </select>
     <input type="submit" value="Filtrar">
 </form>
 <%
-    List<Libro> listaDeLibros = null;
-    if (request.getParameter("categoria") == null || request.getParameter("categoria").equals("seleccionar")) {
-        listaDeLibros = Libro.buscarTodos();
-    } else{
-            listaDeLibros = Libro.buscarPorCategoria(request.getParameter("categoria"));
-    }
+    List<Libro> listaDeLibros = (List<Libro>) request.getAttribute("listaDeLibros");
     for (Libro libro : listaDeLibros) { %>
 <%=libro.getIsbn()%> -
 <%=libro.getTitulo()%> -
 <%=libro.getCategoria()%>
-<a href="BorrarLibro.jsp?isbn=<%=libro.getIsbn()%>">Borrar</a>
-<a href="FormularioEditarLibro.jsp?isbn=<%=libro.getIsbn()%>">Editar</a>
+<a href="BorrarLibro.do?isbn=<%=libro.getIsbn()%>">Borrar</a>
+<a href="FormularioEditarLibro.do?isbn=<%=libro.getIsbn()%>">Editar</a>
 <br>
 <% } %>
-
-<a href="FormularioInsertarLibro.jsp">Insertar Libro</a>
+<br>
+<a href="FormularioInsertarLibro.do"><input type="button" value="Insertar Libro"></a>
 </body>
 </html>

@@ -1,11 +1,15 @@
 package com.joseoliveros;
 
+import org.apache.log4j.Logger;
+
 import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DataBaseHelper<T> {
+
+    private static final Logger log = Logger.getLogger(DataBaseHelper.class.getPackage().getName());
 
     private final String DRIVER = "com.mysql.jdbc.Driver";
     private final String URL = "jdbc:mysql://127.0.0.1:3306/arquitecturajava";
@@ -19,28 +23,29 @@ public class DataBaseHelper<T> {
 
         try {
             Class.forName(DRIVER);
+            log.debug("Cargando driver");
             conexion = DriverManager.getConnection(URL, USUARIO, CLAVE);
             sentencia = conexion.createStatement();
             filasAfectadas = sentencia.executeUpdate(consultaSQL);
         } catch (ClassNotFoundException e) {
-            System.out.println("Error cargando el driver: " + e.getMessage());
+            log.error("Error de acceso al driver " + e.getMessage());
             throw new DataBaseException("Error de SQL: ", e);
         } catch (SQLException e) {
-            System.out.println("Error de SQL" + e.getMessage());
+            log.error("Error de SQL " + e.getMessage());
             throw new DataBaseException("Error de SQL", e);
         } finally {
             if (sentencia != null) {
                 try {
                     sentencia.close();
                 } catch (SQLException e) {
-                    System.out.println("Error cerrando el statement: " + e.getMessage());
+                    log.error("Error cerrando el statement: " + e.getMessage());
                 }
             }
             if (conexion != null) {
                 try {
                     conexion.close();
                 } catch (SQLException e) {
-                    System.out.println("Error cerrando la conexion: " + e.getMessage());
+                    log.error("Error cerrando la conexion: " + e.getMessage());
                 }
             }
         }
@@ -55,6 +60,7 @@ public class DataBaseHelper<T> {
 
         try {
             Class.forName(DRIVER);
+            log.debug("Cargando driver");
             conexion = DriverManager.getConnection(URL, USUARIO, CLAVE);
             sentencia = conexion.createStatement();
             filas = sentencia.executeQuery(consultaSQL);
@@ -71,7 +77,7 @@ public class DataBaseHelper<T> {
                 listaDeObjetos.add(objeto);
             }
         } catch (Exception e) {
-            System.out.println("Error al seleccionar registros " + e.getMessage());
+            log.error("Error al seleccionar registros " + e.getMessage());
             e.printStackTrace();
             throw new DataBaseException("Error al seleccionar registros");
         } finally {
@@ -79,14 +85,14 @@ public class DataBaseHelper<T> {
                 try {
                     sentencia.close();
                 } catch (SQLException e) {
-                    System.out.println("Error en SQL" + e.getMessage());
+                    log.error("Error de SQL " + e.getMessage());
                 }
             }
             if (conexion != null) {
                 try {
                     conexion.close();
                 } catch (SQLException e) {
-                    System.out.println("Error en SQL" + e.getMessage());
+                    log.error("Error de SQL " + e.getMessage());
                 }
             }
         }
