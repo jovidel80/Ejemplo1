@@ -23,10 +23,11 @@ public class DataBaseHelper<T> {
 
         try {
             Class.forName(DRIVER);
-            log.debug("Cargando driver");
+            log.info("Cargando driver");
             conexion = DriverManager.getConnection(URL, USUARIO, CLAVE);
             sentencia = conexion.createStatement();
             filasAfectadas = sentencia.executeUpdate(consultaSQL);
+            log.info("Ejecutando query: " + consultaSQL);
         } catch (ClassNotFoundException e) {
             log.error("Error de acceso al driver " + e.getMessage());
             throw new DataBaseException("Error de SQL: ", e);
@@ -37,6 +38,7 @@ public class DataBaseHelper<T> {
             if (sentencia != null) {
                 try {
                     sentencia.close();
+                    log.info("Cerrando sentencia");
                 } catch (SQLException e) {
                     log.error("Error cerrando el statement: " + e.getMessage());
                 }
@@ -44,11 +46,13 @@ public class DataBaseHelper<T> {
             if (conexion != null) {
                 try {
                     conexion.close();
+                    log.info("Cerrando conexión");
                 } catch (SQLException e) {
                     log.error("Error cerrando la conexion: " + e.getMessage());
                 }
             }
         }
+        log.info("Devolviendo número de filas afectadas " + filasAfectadas);
         return filasAfectadas;
     }
 
@@ -60,10 +64,11 @@ public class DataBaseHelper<T> {
 
         try {
             Class.forName(DRIVER);
-            log.debug("Cargando driver");
+            log.info("Cargando driver");
             conexion = DriverManager.getConnection(URL, USUARIO, CLAVE);
             sentencia = conexion.createStatement();
             filas = sentencia.executeQuery(consultaSQL);
+            log.info("Ejecutando query: " + consultaSQL);
             while (filas.next()) {
                 T objeto = (T) Class.forName(clase.getName()).newInstance();
                 Method[] metodos = objeto.getClass().getDeclaredMethods();
@@ -84,6 +89,7 @@ public class DataBaseHelper<T> {
             if (sentencia != null) {
                 try {
                     sentencia.close();
+                    log.info("Cerrando sentencia");
                 } catch (SQLException e) {
                     log.error("Error de SQL " + e.getMessage());
                 }
@@ -91,11 +97,13 @@ public class DataBaseHelper<T> {
             if (conexion != null) {
                 try {
                     conexion.close();
+                    log.info("Cerrando conexión");
                 } catch (SQLException e) {
                     log.error("Error de SQL " + e.getMessage());
                 }
             }
         }
+        log.info("Devolviendo lista de objetos del tipo " + clase.getName());
         return listaDeObjetos;
     }
 }
