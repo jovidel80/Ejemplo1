@@ -42,7 +42,7 @@
         </p>
     </fieldset>
     <br>
-    <a href="/MostrarLibros.do"><input type="button" value="Mostrar Libros"></a>
+    <a href="MostrarLibros.do"><input type="button" value="Mostrar Libros"></a>
 </form>
 </body>
 </html>

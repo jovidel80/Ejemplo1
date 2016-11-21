@@ -49,5 +49,7 @@
         <p><input type="submit" value="Salvar"></p>
     </fieldset>
 </form>
+<br>
+<a href="MostrarLibros.do"><input type="button" value="Mostrar Libros"></a>
 </body>
 </html>
