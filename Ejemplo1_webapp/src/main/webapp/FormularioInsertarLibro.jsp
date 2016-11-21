@@ -15,7 +15,7 @@
     <script type="text/javascript" src="js/validacion.js"></script>
 </head>
 <body>
-<form action="InsertarLibro.do" id="miformulario" onsubmit="return validacion()">
+<form action="InsertarLibro.do" id="formularioInsercion" onsubmit="return validacion()">
     <fieldset>
         <legend>Formulario Alta Libro</legend>
         <p>

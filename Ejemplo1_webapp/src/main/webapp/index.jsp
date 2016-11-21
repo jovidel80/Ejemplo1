@@ -6,13 +6,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    response.sendRedirect("MostrarLibros.do");
+%>
 <html>
 <head>
     <title>Prueba</title>
 </head>
 <body>
-<a href="Prueba.hacer">Enlace</a>
-<a href="hola.hacer">Hola</a>
 
 </body>
 </html>

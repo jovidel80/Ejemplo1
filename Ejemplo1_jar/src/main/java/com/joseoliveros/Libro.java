@@ -91,4 +91,13 @@ public class Libro {
         DataBaseHelper<Libro> helper = new DataBaseHelper<Libro>();
         return helper.seleccionarRegistros(consultaSQl, Libro.class);
     }
+
+    @Override
+    public String toString() {
+        return "Libro{" +
+                "isbn='" + isbn + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", categoria='" + categoria + '\'' +
+                '}';
+    }
 }
