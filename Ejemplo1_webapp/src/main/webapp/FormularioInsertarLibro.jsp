@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: capitanjovi
@@ -29,12 +30,9 @@
         <p>
             <label for="categoria">Categoría:</label>
             <select name="categoria" id="categoria">
-                <%
-                    List<String> listaDeCategorias = (List<String>) request.getAttribute("listaDeCategorias");
-                    for (String categoria : listaDeCategorias) { %>
-                <option value="<%=categoria%>"><%=categoria%></option>
-                    <% }
-                %>
+                <c:forEach var="categoria" items="${listaDeCategorias}">
+                    <option value="${categoria}">${categoria}</option>
+                </c:forEach>
             </select>
         </p>
         <p>

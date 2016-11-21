@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.joseoliveros.Libro" %>
 <%@ page import="java.util.List" %>
 <%--
@@ -16,29 +17,31 @@
 <form name="filtroCategoria" action="filtrar.do">
 <select name="categoria">
     <option value="seleccionar">Seleccionar</option>
-    <%
-        List<String> listaDeCategorias = null;
-        listaDeCategorias = (List<String>) request.getAttribute("listaDeCategorias");
-        for (String categoria : listaDeCategorias) {
-    if (categoria.equals(request.getParameter("categoria"))) { %>
-    <option value="<%=categoria%>"><%=categoria%></option>
-    <% } else { %>
-    <option value="<%=categoria%>"><%=categoria%></option>
-    <%}
-        }%>
+    <c:forEach var="categoria" items="${listaDeCategorias}">
+        <option value="${categoria}">${categoria}</option>
+    </c:forEach>
 </select>
     <input type="submit" value="Filtrar">
 </form>
-<%
-    List<Libro> listaDeLibros = (List<Libro>) request.getAttribute("listaDeLibros");
-    for (Libro libro : listaDeLibros) { %>
-<%=libro.getIsbn()%> -
-<%=libro.getTitulo()%> -
-<%=libro.getCategoria()%>
-<a href="BorrarLibro.do?isbn=<%=libro.getIsbn()%>">Borrar</a>
-<a href="FormularioEditarLibro.do?isbn=<%=libro.getIsbn()%>">Editar</a>
-<br>
-<% } %>
+    <table border=" 2px black" style="border-collapse: collapse" cellpadding="5 px">
+        <tr>
+            <th>ISBN</th>
+            <th>Título</th>
+            <th>Categoría</th>
+            <th></th>
+            <th></th>
+        </tr>
+<c:forEach var="libro" items="${listaDeLibros}">
+    <tr>
+        <td align="center">${libro.isbn}</td>
+        <td align="center">${libro.titulo}</td>
+        <td align="center">${libro.categoria}</td>
+        <td><a href="BorrarLibro.do?isbn=${libro.isbn}"><input type="button" value="Borrar"></a></td>
+        <td><a href="FormularioEditarLibro.do?isbn=${libro.isbn}&categoria=${libro.categoria}"><input type="button" value="Editar"></a></td>
+    </tr>
+</c:forEach>
+
+    </table>
 <br>
 <a href="FormularioInsertarLibro.do"><input type="button" value="Insertar Libro"></a>
 </body>

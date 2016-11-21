@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.joseoliveros.Libro" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.joseoliveros.DataBaseException" %><%--
@@ -25,24 +26,25 @@
         <legend>Formulario alta libro</legend>
         <p>
             <label for="isbn">ISBN:</label>
-            <input type="text" id="isbn" name="isbn" value="<%=libro.getIsbn()%>" readonly="readonly">
+            <input type="text" id="isbn" name="isbn" value="${libro.isbn}" readonly="readonly">
         </p>
         <p>
             <label for="titulo">Título:</label>
-            <input type="text" id="titulo" name="titulo" value="<%=libro.getTitulo()%>">
+            <input type="text" id="titulo" name="titulo" value="${libro.titulo}">
         </p>
         <p>
             <label for="categoria">Categoría:</label>
         <select name="categoria" id="categoria">
-        <%
-            for (String categoria : listaDeCategorias) {
-                if (libro.getCategoria().equals(categoria)) { %>
-            <option value="<%=categoria%>" selected="selected"><%=categoria%></option>
-            <%  } else { %>
-            <option value="<%=categoria%>"><%=categoria%></option>
-           <% }
-            }
-        %>
+            <c:forEach var="categoria" items="${listaDeCategorias}">
+                <c:choose>
+                    <c:when test="${libro.categoria eq categoria}">
+                        <option value="${categoria}" selected="selected">${categoria}</option>
+                    </c:when>
+                    <c:otherwise>
+                        <option value="${categoria}">${categoria}</option>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
         </select>
         <br>
         </p>
