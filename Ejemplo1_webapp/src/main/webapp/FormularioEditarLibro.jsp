@@ -10,11 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Libro libro = null;
-    try {
         libro = Libro.buscarPorClave(request.getParameter("isbn"));
-    } catch (DataBaseException e) {
-        e.printStackTrace();
-    }
     List<String> listaDeCategorias = Libro.buscarTodasLasCategoria();
 %>
 <html>
@@ -24,7 +20,7 @@
     <script type="text/javascript" src="js/validacion.js"></script>
 </head>
 <body>
-<form action="SalvarLibro.jsp" id="formularioEdicion">
+<form action="SalvarLibro.do" id="formularioEdicion">
     <fieldset>
         <legend>Formulario alta libro</legend>
         <p>

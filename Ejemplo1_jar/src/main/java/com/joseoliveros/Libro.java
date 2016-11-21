@@ -1,6 +1,5 @@
 package com.joseoliveros;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class Libro {
@@ -47,47 +46,47 @@ public class Libro {
         this.categoria = categoria;
     }
 
-    public static List<String> buscarTodasLasCategoria() throws DataBaseException {
+    public static List<String> buscarTodasLasCategoria() {
         String consultaSQL = "select distinct(categoria) as categoria from libros";
         DataBaseHelper<String> helper = new DataBaseHelper<String>();
         List<String> listaDeCategoria = helper.seleccionarRegistros(consultaSQL, String.class);
         return listaDeCategoria;
     }
 
-    public void insertar() throws DataBaseException {
+    public void insertar() {
         String consultaSQL = "insert into Libros (isbn,titulo,categoria) values "; 
         consultaSQL += "('" + this.isbn + "','" + this.titulo + "','" + this.categoria + "')";
         DataBaseHelper dbh = new DataBaseHelper();
         dbh.modificarResgistro(consultaSQL);
     }
 
-    public static List<Libro> buscarTodos() throws DataBaseException {
+    public static List<Libro> buscarTodos() {
         String consultaSQL = "select * from libros";
         DataBaseHelper<Libro> helper = new DataBaseHelper<Libro>();
         List<Libro> listaDeLibros = helper.seleccionarRegistros(consultaSQL, Libro.class);
         return listaDeLibros;
     }
 
-    public void borrar() throws DataBaseException {
+    public void borrar() {
         String consultaSQL = "delete from libros where isbn=" + this.isbn + "";
         DataBaseHelper<Libro> helper = new DataBaseHelper<Libro>();
         helper.modificarResgistro(consultaSQL);
     }
 
-    public static Libro buscarPorClave(String isbn) throws DataBaseException {
+    public static Libro buscarPorClave(String isbn) {
         String consultaSQL = "select * from libros where isbn=" + "" + isbn + "";
         DataBaseHelper<Libro> helper = new DataBaseHelper<Libro>();
         List<Libro> listaDeLibros = helper.seleccionarRegistros(consultaSQL, Libro.class);
         return listaDeLibros.get(0);
     }
 
-    public void salvar() throws DataBaseException {
+    public void salvar() {
         String consultaSQL = "UPDATE `arquitecturajava`.`libros` SET `titulo`='"+ this.titulo + "', `categoria`='"+ this.categoria + "' WHERE `isbn`='"+this.isbn+"';";
         DataBaseHelper<Libro> helper = new DataBaseHelper<Libro>();
         helper.modificarResgistro(consultaSQL);
     }
 
-    public static List<Libro> buscarPorCategoria(String categoria) throws DataBaseException {
+    public static List<Libro> buscarPorCategoria(String categoria) {
         String consultaSQl = "select * from libros where categoria='" + categoria + "'";
         DataBaseHelper<Libro> helper = new DataBaseHelper<Libro>();
         return helper.seleccionarRegistros(consultaSQl, Libro.class);

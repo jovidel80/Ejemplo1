@@ -9,14 +9,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    try {
         String isbn = request.getParameter("isbn");
         Libro libro = new Libro(isbn);
         libro.borrar();
         response.sendRedirect("MostrarLibros.jsp");
-    } catch (DataBaseException e) {
-        e.printStackTrace();
-    }
 %>
 <html>
 <head>
