@@ -1,4 +1,4 @@
-package com.joseoliveros.pruebas;
+package com.joseoliveros.aplicacion.bo.pruebas;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;

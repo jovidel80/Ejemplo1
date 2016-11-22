@@ -1,4 +1,4 @@
-package com.joseoliveros;
+package com.joseoliveros.aplicacion.bo;
 
 public class DataBaseException extends RuntimeException {
 

@@ -1,6 +1,6 @@
-package com.joseoliveros.aplicacion.controlador.acciones;
+package com.joseoliveros.aplicacion.bo.aplicacion.controlador.acciones;
 
-import com.joseoliveros.Libro;
+import com.joseoliveros.aplicacion.bo.Libro;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;

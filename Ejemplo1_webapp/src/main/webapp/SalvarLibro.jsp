@@ -1,4 +1,4 @@
-<%@ page import="com.joseoliveros.Libro" %><%--
+<%@ page import="com.joseoliveros.aplicacion.bo.Libro" %><%--
   Created by IntelliJ IDEA.
   User: Joliveros
   Date: 07/11/2016

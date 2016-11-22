@@ -1,4 +1,4 @@
-package com.joseoliveros;
+package com.joseoliveros.aplicacion.bo;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

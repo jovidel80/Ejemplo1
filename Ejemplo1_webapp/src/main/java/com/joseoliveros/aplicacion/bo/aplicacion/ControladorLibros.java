@@ -1,6 +1,6 @@
-package com.joseoliveros.aplicacion;
+package com.joseoliveros.aplicacion.bo.aplicacion;
 
-import com.joseoliveros.aplicacion.controlador.acciones.*;
+import com.joseoliveros.aplicacion.bo.aplicacion.controlador.acciones.Accion;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;

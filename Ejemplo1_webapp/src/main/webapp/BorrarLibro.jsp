@@ -1,5 +1,5 @@
-<%@ page import="com.joseoliveros.Libro" %>
-<%@ page import="com.joseoliveros.DataBaseException" %><%--
+<%@ page import="com.joseoliveros.aplicacion.bo.Libro" %>
+<%@ page import="com.joseoliveros.aplicacion.bo.DataBaseException" %><%--
   Created by IntelliJ IDEA.
   User: capitanjovi
   Date: 6/11/16

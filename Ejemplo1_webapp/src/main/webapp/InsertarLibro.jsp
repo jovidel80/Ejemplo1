@@ -6,8 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.joseoliveros.Libro" %>
-<%@ page import="com.joseoliveros.DataBaseException" %>
+<%@ page import="com.joseoliveros.aplicacion.bo.Libro" %>
+<%@ page import="com.joseoliveros.aplicacion.bo.DataBaseException" %>
 
 <%
         String isbn = request.getParameter("isbn");

@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="com.joseoliveros.Libro" %>
+<%@ page import="com.joseoliveros.aplicacion.bo.Libro" %>
 <%@ page import="java.util.List" %>
 <%--
   Created by IntelliJ IDEA.

@@ -1,4 +1,4 @@
-package com.joseoliveros;
+package com.joseoliveros.aplicacion.bo;
 
 import org.apache.log4j.Logger;
 

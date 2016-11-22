@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="com.joseoliveros.Libro" %>
+<%@ page import="com.joseoliveros.aplicacion.bo.Libro" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.joseoliveros.DataBaseException" %><%--
+<%@ page import="com.joseoliveros.aplicacion.bo.DataBaseException" %><%--
   Created by IntelliJ IDEA.
   User: Joliveros
   Date: 07/11/2016

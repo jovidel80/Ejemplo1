@@ -1,6 +1,5 @@
-package com.joseoliveros.pruebas;
+package com.joseoliveros.aplicacion.bo.pruebas;
 
-import com.joseoliveros.Libro;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -21,11 +20,8 @@ public class Prueba {
         try {
             factory = new Configuration().configure().buildSessionFactory();
             session = factory.openSession();
-            Libro libro = (Libro) session.get(Libro.class, "8");
-            session.delete(libro);
         } catch (HibernateException e) {
             System.out.println(e.getMessage());
-            transaction.rollback();
         } finally {
             session.close();
             factory.close();
