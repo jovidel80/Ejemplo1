@@ -2,8 +2,7 @@ package com.joseoliveros.aplicacion.controlador.acciones;
 
 import com.joseoliveros.aplicacion.bo.Categoria;
 import com.joseoliveros.aplicacion.bo.Libro;
-import com.joseoliveros.aplicacion.dao.CategoriaDAO;
-import com.joseoliveros.aplicacion.dao.LibroDAO;
+import com.joseoliveros.aplicacion.dao.*;
 import com.joseoliveros.aplicacion.dao.jpa.CategoriaDAOJPAImpl;
 import com.joseoliveros.aplicacion.dao.jpa.LibroDAOJPAImpl;
 import org.apache.log4j.Logger;
@@ -18,8 +17,9 @@ public class MostrarLibrosAccion extends Accion {
 
     public String ejecutar(HttpServletRequest request, HttpServletResponse response) {
         log.info("Ejecutanto MostrarLibrosAccion...");
-        LibroDAO libroDAO = new LibroDAOJPAImpl();
-        CategoriaDAO categoriaDAO = new CategoriaDAOJPAImpl();
+        DAOFactory factoria = DAOAbstractFactory.getInstance();
+        CategoriaDAO categoriaDAO = factoria.getCategoriaDAO();
+        LibroDAO libroDAO = factoria.getLibroDAO();
         List<Libro> listaDeLibros = libroDAO.buscarTodos();
         List<Categoria> listaDeCategorias = categoriaDAO.buscarTodos();
         request.setAttribute("listaDeLibros", listaDeLibros);

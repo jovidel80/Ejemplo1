@@ -3,6 +3,8 @@ package com.joseoliveros.aplicacion.controlador.acciones;
 import com.joseoliveros.aplicacion.bo.Categoria;
 import com.joseoliveros.aplicacion.bo.Libro;
 import com.joseoliveros.aplicacion.dao.CategoriaDAO;
+import com.joseoliveros.aplicacion.dao.DAOAbstractFactory;
+import com.joseoliveros.aplicacion.dao.DAOFactory;
 import com.joseoliveros.aplicacion.dao.LibroDAO;
 import com.joseoliveros.aplicacion.dao.jpa.CategoriaDAOJPAImpl;
 import com.joseoliveros.aplicacion.dao.jpa.LibroDAOJPAImpl;
@@ -18,8 +20,9 @@ public class FiltrarLibrosPorCategoriaAccion extends Accion {
 
     public String ejecutar(HttpServletRequest request, HttpServletResponse response) {
         log.info("Ejecutanto FiltrarLibrosPorCategoriaAccion...");
-        LibroDAO libroDAO = new LibroDAOJPAImpl();
-        CategoriaDAO categoriaDAO = new CategoriaDAOJPAImpl();
+        DAOFactory factoria = DAOAbstractFactory.getInstance();
+        LibroDAO libroDAO = factoria.getLibroDAO();
+        CategoriaDAO categoriaDAO = factoria.getCategoriaDAO();
         List<Libro> listaDeLibros = null;
         List<Categoria> listaDeCategorias = categoriaDAO.buscarTodos();
         if (request.getParameter("categoria") == null ||
