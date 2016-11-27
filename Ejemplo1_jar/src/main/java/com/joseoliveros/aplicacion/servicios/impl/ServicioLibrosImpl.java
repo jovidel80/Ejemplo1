@@ -7,11 +7,14 @@ import com.joseoliveros.aplicacion.dao.DAOAbstractFactory;
 import com.joseoliveros.aplicacion.dao.DAOFactory;
 import com.joseoliveros.aplicacion.dao.LibroDAO;
 import com.joseoliveros.aplicacion.servicios.ServicioLibros;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service(value = "servicioLibros")
 public class ServicioLibrosImpl implements ServicioLibros {
 
     private LibroDAO libroDAO = null;
@@ -76,6 +79,7 @@ public class ServicioLibrosImpl implements ServicioLibros {
     }
 
     @Override
+    @Autowired
     public void setLibroDAO(LibroDAO libroDAO) {
         this.libroDAO = libroDAO;
     }
@@ -86,6 +90,7 @@ public class ServicioLibrosImpl implements ServicioLibros {
     }
 
     @Override
+    @Autowired
     public void setCategoriaDAO(CategoriaDAO categoriaDAO) {
         this.categoriaDAO = categoriaDAO;
     }

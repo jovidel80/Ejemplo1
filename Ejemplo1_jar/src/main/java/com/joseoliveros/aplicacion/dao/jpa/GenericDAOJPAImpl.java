@@ -1,16 +1,33 @@
 package com.joseoliveros.aplicacion.dao.jpa;
 
 import com.joseoliveros.aplicacion.dao.GenericDAO;
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
-import java.util.Collections;
 import java.util.List;
 
-public abstract class GenericDAOJPAImpl<T, Id extends Serializable> implements GenericDAO<T, Id> {
+@Repository
+public abstract class GenericDAOJPAImpl<T, Id extends Serializable>  implements GenericDAO<T, Id> {
 
-    EntityManagerFactory entityManagerFactory;
+    private static final Logger log = Logger.getLogger(GenericDAOJPAImpl.class.getPackage().getName());
+
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     private Class<T> claseDePersistencia;
 
@@ -20,94 +37,41 @@ public abstract class GenericDAOJPAImpl<T, Id extends Serializable> implements G
     }
 
     @Override
+    @Transactional(readOnly = true)
     public T buscarPorClave(Id id) {
-//        EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
-//        EntityManager manager = factoriaSession.createEntityManager();
-        EntityManager manager = getEntityManagerFactory().createEntityManager();
-        T objeto = null;
-        try {
-            objeto = manager.find(claseDePersistencia, id);
-            return objeto;
-        } finally {
-            manager.close();
-        }
+        log.info("Buscando por id = " + id + ", del tipo " + claseDePersistencia.getSimpleName());
+        return getEntityManager().find(claseDePersistencia, id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<T> buscarTodos() {
-//        EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
-//        EntityManager manager = factoriaSession.createEntityManager();
-        EntityManager manager = getEntityManagerFactory().createEntityManager();
+        log.info("Buscando todos del tipo " + claseDePersistencia.getSimpleName());
         List<T> listaDeObjetos = null;
-        try {
-            TypedQuery<T> consulta = manager.createQuery("select o from " + claseDePersistencia.getSimpleName() + " o", claseDePersistencia);
-            listaDeObjetos = consulta.getResultList();
-            return listaDeObjetos;
-        } finally {
-            manager.close();
-        }
+        TypedQuery<T> consulta = entityManager.createQuery("select o from " + claseDePersistencia.getSimpleName()
+                + " o", claseDePersistencia);
+        listaDeObjetos = consulta.getResultList();
+        return listaDeObjetos;
     }
 
     @Override
+    @Transactional
     public void salvar(T objeto) {
-//        EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
-//        EntityManager manager = factoriaSession.createEntityManager();
-        EntityManager manager = getEntityManagerFactory().createEntityManager();
-        EntityTransaction tx = null;
-        try {
-            tx = manager.getTransaction();
-            tx.begin();
-            manager.merge(objeto);
-            tx.commit();
-        } catch (PersistenceException e) {
-            tx.rollback();
-            throw e;
-        } finally {
-            manager.close();
-        }
+        log.info("Salvando objeto del tipo " + claseDePersistencia.getSimpleName());
+        getEntityManager().merge(objeto);
     }
 
     @Override
+    @Transactional
     public void borrar(T objeto) {
-//        EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
-//        EntityManager manager = factoriaSession.createEntityManager();
-        EntityManager manager = getEntityManagerFactory().createEntityManager();
-        EntityTransaction tx = null;
-        try {
-            tx = manager.getTransaction();
-            tx.begin();
-            manager.remove(manager.merge(objeto));
-            tx.commit();
-        } catch (PersistenceException e) {
-            tx.rollback();
-            throw e;
-        } finally {
-            manager.close();
-        }
-
+        log.info("Borrando objeto del tipo " + claseDePersistencia.getSimpleName());
+        getEntityManager().remove(getEntityManager().merge(objeto));
     }
 
     @Override
+    @Transactional
     public void insertar(T objeto) {
-//        EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
-//        EntityManager manager = factoriaSession.createEntityManager();
-        EntityManager manager = getEntityManagerFactory().createEntityManager();
-        EntityTransaction tx = null;
-        try {
-            tx = manager.getTransaction();
-            tx.begin();
-            manager.persist(objeto);
-            tx.commit();
-        } catch (PersistenceException e) {
-            tx.rollback();
-        }
-    }
-
-    public EntityManagerFactory getEntityManagerFactory() {
-        return entityManagerFactory;
-    }
-
-    public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
-        this.entityManagerFactory = entityManagerFactory;
+        log.info("Insertando objeto del tipo " + claseDePersistencia.getSimpleName());
+        getEntityManager().persist(objeto);
     }
 }

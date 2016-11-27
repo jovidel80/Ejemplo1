@@ -36,6 +36,7 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-web:4.3.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.3.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.3.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-orm:4.3.0.RELEASE" />
           <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
           <element id="library" level="project" name="Maven: org.eclipse.jetty:apache-jstl:9.2.1.v20140609" />
           <element id="library" level="project" name="Maven: org.apache.taglibs:taglibs-standard-spec:1.2.1" />

@@ -4,14 +4,16 @@ import com.joseoliveros.aplicacion.bo.Categoria;
 import com.joseoliveros.aplicacion.bo.Libro;
 import com.joseoliveros.aplicacion.dao.CategoriaDAO;
 import com.joseoliveros.aplicacion.dao.LibroDAO;
+import jdk.nashorn.internal.ir.annotations.Reference;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
+@Repository
 public class LibroDAOJPAImpl extends GenericDAOJPAImpl<Libro, String> implements LibroDAO {
-
 
     @Override
     public List<Libro> buscarPorCategoria(Categoria categoria) {
