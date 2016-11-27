@@ -1,5 +1,6 @@
 package com.joseoliveros.aplicacion.bo.aplicacion.controlador.acciones;
 
+import com.joseoliveros.aplicacion.bo.Categoria;
 import com.joseoliveros.aplicacion.bo.Libro;
 import org.apache.log4j.Logger;
 
@@ -14,7 +15,7 @@ public class FormularioEditarLibroAccion extends Accion {
     public String ejecutar(HttpServletRequest request, HttpServletResponse response) {
         log.info("Ejecutanto FormularioEditarLibroAccion...");
         String isbn = request.getParameter("isbn");
-        List<String> listaDeCategorias = Libro.buscarTodasLasCategoria();
+        List<Categoria> listaDeCategorias = Categoria.buscarTodos();
         Libro libro = Libro.buscarPorClave(isbn);
         request.setAttribute("listaDeCategorias", listaDeCategorias);
         request.setAttribute("libro", libro);

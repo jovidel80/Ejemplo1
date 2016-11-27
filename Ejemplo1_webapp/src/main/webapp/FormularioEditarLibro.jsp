@@ -37,11 +37,11 @@
         <select name="categoria" id="categoria">
             <c:forEach var="categoria" items="${listaDeCategorias}">
                 <c:choose>
-                    <c:when test="${libro.categoria eq categoria}">
-                        <option value="${categoria}" selected="selected">${categoria}</option>
+                    <c:when test="${libro.categoria.id eq categoria.id}">
+                        <option value="${categoria.id}" selected="selected">${categoria.descripcion}</option>
                     </c:when>
                     <c:otherwise>
-                        <option value="${categoria}">${categoria}</option>
+                        <option value="${categoria.id}">${categoria.descripcion}</option>
                     </c:otherwise>
                 </c:choose>
             </c:forEach>

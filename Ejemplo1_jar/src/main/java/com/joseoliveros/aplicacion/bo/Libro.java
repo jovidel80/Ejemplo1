@@ -3,11 +3,9 @@ package com.joseoliveros.aplicacion.bo;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.annotations.ManyToAny;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Query;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -19,7 +17,10 @@ public class Libro {
     @Id
     private String isbn;
     private String titulo;
-    private String categoria;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria")
+    private Categoria categoria;
 
     @Override
     public boolean equals(Object o) {
@@ -45,7 +46,7 @@ public class Libro {
         this.isbn = isbn;
     }
 
-    public Libro(String isbn, String titulo, String categoria) {
+    public Libro(String isbn, String titulo, Categoria categoria) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.categoria = categoria;
@@ -67,11 +68,11 @@ public class Libro {
         this.titulo = titulo;
     }
 
-    public String getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
@@ -109,7 +110,7 @@ public class Libro {
         log.info("Obteniendo SessionFactory");
         Session session = factory.openSession();
         log.info("Obteniendo Session");
-        List listaDeLibros = session.createQuery("from Libro libro").list();
+        List listaDeLibros = session.createQuery("from Libro libro right join fetch libro.categoria").list();
         log.info("Retornando listaDeLibros: " + listaDeLibros);
         session.close();
         log.info("Cerrando Session");
@@ -151,7 +152,7 @@ public class Libro {
         log.info("Cerrando Session");
     }
 
-    public static List<Libro> buscarPorCategoria(String categoria) {
+    public static List<Libro> buscarPorCategoria(Categoria categoria) {
         SessionFactory factory = HibernateHelper.getSessionFactory();
         log.info("Obteniendo SessionFactory");
         Session session = factory.openSession();
@@ -165,11 +166,11 @@ public class Libro {
     }
 
     @Override
-    public String toString() {
+    public String   toString() {
         return "Libro{" +
                 "isbn='" + isbn + '\'' +
                 ", titulo='" + titulo + '\'' +
-                ", categoria='" + categoria + '\'' +
+                ", categoria=" + categoria +
                 '}';
     }
 }

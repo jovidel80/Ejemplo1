@@ -1,5 +1,6 @@
 package com.joseoliveros.aplicacion.bo.aplicacion.controlador.acciones;
 
+import com.joseoliveros.aplicacion.bo.Categoria;
 import com.joseoliveros.aplicacion.bo.Libro;
 import org.apache.log4j.Logger;
 
@@ -13,7 +14,7 @@ public class FormularioInsertarLibroAccion extends Accion {
 
     public String ejecutar(HttpServletRequest request, HttpServletResponse response) {
         log.info("Ejecutanto FormularioInsertarLibroAccion...");
-        List<String> listaDeCategorias = Libro.buscarTodasLasCategoria();
+        List<Categoria> listaDeCategorias = Categoria.buscarTodos();
         request.setAttribute("listaDeCategorias", listaDeCategorias);
 
         log.info("FormularioInsertarLibro.jsp");

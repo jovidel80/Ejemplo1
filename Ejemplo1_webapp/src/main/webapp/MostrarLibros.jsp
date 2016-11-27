@@ -18,7 +18,7 @@
 <select name="categoria">
     <option value="seleccionar">Seleccionar</option>
     <c:forEach var="categoria" items="${listaDeCategorias}">
-        <option value="${categoria}">${categoria}</option>
+        <option value="${categoria.id}">${categoria.descripcion}</option>
     </c:forEach>
 </select>
     <input type="submit" value="Filtrar">
@@ -35,7 +35,7 @@
     <tr>
         <td align="center">${libro.isbn}</td>
         <td align="center">${libro.titulo}</td>
-        <td align="center">${libro.categoria}</td>
+        <td align="center">${libro.categoria.descripcion}</td>
         <td><a href="BorrarLibro.do?isbn=${libro.isbn}"><input type="button" value="Borrar"></a></td>
         <td><a href="FormularioEditarLibro.do?isbn=${libro.isbn}&categoria=${libro.categoria}"><input type="button" value="Editar"></a></td>
     </tr>

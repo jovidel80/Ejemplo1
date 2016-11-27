@@ -1,5 +1,6 @@
 package com.joseoliveros.aplicacion.bo.aplicacion.controlador.acciones;
 
+import com.joseoliveros.aplicacion.bo.Categoria;
 import com.joseoliveros.aplicacion.bo.Libro;
 import org.apache.log4j.Logger;
 
@@ -15,7 +16,8 @@ public class SalvarLibroAccion extends Accion {
         String isbn = request.getParameter("isbn");
         String titulo = request.getParameter("titulo");
         String categoria = request.getParameter("categoria");
-        Libro libro = new Libro(isbn, titulo, categoria);
+        Categoria objetoCategoria = new Categoria(Integer.parseInt(categoria));
+        Libro libro = new Libro(isbn, titulo, objetoCategoria);
         libro.salvar();
 
         log.info("Retornando MostrarLibros.do");

@@ -11,7 +11,7 @@ import java.util.List;
 public class Categoria {
 
     @Id
-    private String id;
+    private int id;
 
     private String descripcion;
 
@@ -19,28 +19,35 @@ public class Categoria {
     @JoinColumn(name = "categoria")
     private List<Libro> listaDeLibros;
 
+    public Categoria() {
+
+    }
+
+    public Categoria(int id) {
+        this.id = id;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Categoria that = (Categoria) o;
+        Categoria categoria = (Categoria) o;
 
-        return id.equals(that.id);
+        return id == categoria.id;
 
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
-    }
-
-    public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -63,8 +70,26 @@ public class Categoria {
     public static List<Categoria> buscarTodos() {
         SessionFactory factory = HibernateHelper.getSessionFactory();
         Session session = factory.openSession();
-//        List<Categoria> listaDeCategorias = session.createQuery("from Categoria categoria").list();
+        List<Categoria> listaDeCategorias = session.createQuery("from Categoria categoria").list();
         session.close();
-        return null;
+        return listaDeCategorias;
+    }
+
+    public static Categoria buscarPorClave(int id) {
+        SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Query consulta = session.createQuery("from Categoria categoria where id=:id");
+        consulta.setParameter("id", id);
+        Categoria categoria = (Categoria) consulta.getSingleResult();
+        session.close();
+        return categoria;
+    }
+
+    @Override
+    public String toString() {
+        return "Categoria{" +
+                "id='" + id + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                '}';
     }
 }

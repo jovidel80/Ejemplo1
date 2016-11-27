@@ -1,5 +1,6 @@
 package com.joseoliveros.aplicacion.bo.aplicacion.controlador.acciones;
 
+import com.joseoliveros.aplicacion.bo.Categoria;
 import com.joseoliveros.aplicacion.bo.Libro;
 import org.apache.log4j.Logger;
 
@@ -14,13 +15,13 @@ public class FiltrarLibrosPorCategoriaAccion extends Accion {
     public String ejecutar(HttpServletRequest request, HttpServletResponse response) {
         log.info("Ejecutanto FiltrarLibrosPorCategoriaAccion...");
         List<Libro> listaDeLibros = null;
-        List<String> listaDeCategorias = Libro.buscarTodasLasCategoria();
+        List<Categoria> listaDeCategorias = Categoria.buscarTodos();
         if (request.getParameter("categoria") == null ||
                 request.getParameter("categoria").equals("seleccionar")) {
             listaDeLibros = Libro.buscarTodos();
         } else {
-            listaDeLibros = Libro.buscarPorCategoria(request
-                    .getParameter("categoria"));
+            Categoria categoriaSeleccionada = Categoria.buscarPorClave(Integer.parseInt(request.getParameter("categoria")));
+            listaDeLibros = Libro.buscarPorCategoria(categoriaSeleccionada);
         }
         request.setAttribute("listaDeLibros", listaDeLibros);
         request.setAttribute("listaDeCategorias", listaDeCategorias);
