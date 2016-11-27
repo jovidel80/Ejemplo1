@@ -1,10 +1,8 @@
 package com.joseoliveros.aplicacion.controlador.acciones;
 
 import com.joseoliveros.aplicacion.bo.Categoria;
-import com.joseoliveros.aplicacion.dao.CategoriaDAO;
-import com.joseoliveros.aplicacion.dao.DAOAbstractFactory;
-import com.joseoliveros.aplicacion.dao.DAOFactory;
-import com.joseoliveros.aplicacion.dao.jpa.CategoriaDAOJPAImpl;
+import com.joseoliveros.aplicacion.servicios.ServicioLibros;
+import com.joseoliveros.aplicacion.servicios.impl.ServicioLibrosImpl;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +15,8 @@ public class FormularioInsertarLibroAccion extends Accion {
 
     public String ejecutar(HttpServletRequest request, HttpServletResponse response) {
         log.info("Ejecutanto FormularioInsertarLibroAccion...");
-        DAOFactory factoria = DAOAbstractFactory.getInstance();
-        CategoriaDAO categoriaDAO = factoria.getCategoriaDAO();
-        List<Categoria> listaDeCategorias = categoriaDAO.buscarTodos();
+        ServicioLibros servicioLibros = (ServicioLibros) getBean("servicioLibros", request);
+        List<Categoria> listaDeCategorias = servicioLibros.buscarCategoriasLibros();
         request.setAttribute("listaDeCategorias", listaDeCategorias);
 
         log.info("FormularioInsertarLibro.jsp");

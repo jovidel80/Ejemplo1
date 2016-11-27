@@ -2,12 +2,8 @@ package com.joseoliveros.aplicacion.controlador.acciones;
 
 import com.joseoliveros.aplicacion.bo.Categoria;
 import com.joseoliveros.aplicacion.bo.Libro;
-import com.joseoliveros.aplicacion.dao.CategoriaDAO;
-import com.joseoliveros.aplicacion.dao.DAOAbstractFactory;
-import com.joseoliveros.aplicacion.dao.DAOFactory;
-import com.joseoliveros.aplicacion.dao.LibroDAO;
-import com.joseoliveros.aplicacion.dao.jpa.CategoriaDAOJPAImpl;
-import com.joseoliveros.aplicacion.dao.jpa.LibroDAOJPAImpl;
+import com.joseoliveros.aplicacion.servicios.ServicioLibros;
+import com.joseoliveros.aplicacion.servicios.impl.ServicioLibrosImpl;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,17 +16,14 @@ public class FiltrarLibrosPorCategoriaAccion extends Accion {
 
     public String ejecutar(HttpServletRequest request, HttpServletResponse response) {
         log.info("Ejecutanto FiltrarLibrosPorCategoriaAccion...");
-        DAOFactory factoria = DAOAbstractFactory.getInstance();
-        LibroDAO libroDAO = factoria.getLibroDAO();
-        CategoriaDAO categoriaDAO = factoria.getCategoriaDAO();
+        ServicioLibros servicioLibros = (ServicioLibros) getBean("servicioLibros", request);
         List<Libro> listaDeLibros = null;
-        List<Categoria> listaDeCategorias = categoriaDAO.buscarTodos();
+        List<Categoria> listaDeCategorias = servicioLibros.buscarCategoriasLibros();
         if (request.getParameter("categoria") == null ||
                 request.getParameter("categoria").equals("seleccionar")) {
-            listaDeLibros = libroDAO.buscarTodos();
+            listaDeLibros = servicioLibros.buscarTodosLosLibros();
         } else {
-            Categoria categoriaSeleccionada = categoriaDAO.buscarPorClave(Integer.parseInt(request.getParameter("categoria")));
-            listaDeLibros = libroDAO.buscarPorCategoria(categoriaSeleccionada);
+            listaDeLibros = servicioLibros.buscarLibrosPorCategoria(Integer.parseInt(request.getParameter("categoria")));
         }
         request.setAttribute("listaDeLibros", listaDeLibros);
         request.setAttribute("listaDeCategorias", listaDeCategorias);

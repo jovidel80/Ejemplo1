@@ -1,10 +1,8 @@
 package com.joseoliveros.aplicacion.controlador.acciones;
 
 import com.joseoliveros.aplicacion.bo.Libro;
-import com.joseoliveros.aplicacion.dao.DAOAbstractFactory;
-import com.joseoliveros.aplicacion.dao.DAOFactory;
-import com.joseoliveros.aplicacion.dao.LibroDAO;
-import com.joseoliveros.aplicacion.dao.jpa.LibroDAOJPAImpl;
+import com.joseoliveros.aplicacion.servicios.ServicioLibros;
+import com.joseoliveros.aplicacion.servicios.impl.ServicioLibrosImpl;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,10 +15,9 @@ public class BorrarLibroAccion extends Accion {
     public String ejecutar(HttpServletRequest request, HttpServletResponse response) {
         log.info("Ejecutanto BorrarLibroAccion...");
         String isbn = request.getParameter("isbn");
-        DAOFactory factoria = DAOAbstractFactory.getInstance();
-        LibroDAO libroDAO = factoria.getLibroDAO();
+        ServicioLibros servicioLibros = (ServicioLibros) getBean("servicioLibros", request);
         Libro libro = new Libro(isbn);
-        libroDAO.borrar(libro);
+        servicioLibros.borrarLibro(libro);
         log.info("Retornando MostrarLibros.do");
         return "MostrarLibros.do";
     }

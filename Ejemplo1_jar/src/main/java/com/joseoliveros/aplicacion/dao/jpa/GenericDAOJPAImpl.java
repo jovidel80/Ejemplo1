@@ -10,6 +10,8 @@ import java.util.List;
 
 public abstract class GenericDAOJPAImpl<T, Id extends Serializable> implements GenericDAO<T, Id> {
 
+    EntityManagerFactory entityManagerFactory;
+
     private Class<T> claseDePersistencia;
 
     @SuppressWarnings("unchecked")
@@ -19,8 +21,9 @@ public abstract class GenericDAOJPAImpl<T, Id extends Serializable> implements G
 
     @Override
     public T buscarPorClave(Id id) {
-        EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
-        EntityManager manager = factoriaSession.createEntityManager();
+//        EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
+//        EntityManager manager = factoriaSession.createEntityManager();
+        EntityManager manager = getEntityManagerFactory().createEntityManager();
         T objeto = null;
         try {
             objeto = manager.find(claseDePersistencia, id);
@@ -32,8 +35,9 @@ public abstract class GenericDAOJPAImpl<T, Id extends Serializable> implements G
 
     @Override
     public List<T> buscarTodos() {
-        EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
-        EntityManager manager = factoriaSession.createEntityManager();
+//        EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
+//        EntityManager manager = factoriaSession.createEntityManager();
+        EntityManager manager = getEntityManagerFactory().createEntityManager();
         List<T> listaDeObjetos = null;
         try {
             TypedQuery<T> consulta = manager.createQuery("select o from " + claseDePersistencia.getSimpleName() + " o", claseDePersistencia);
@@ -46,8 +50,9 @@ public abstract class GenericDAOJPAImpl<T, Id extends Serializable> implements G
 
     @Override
     public void salvar(T objeto) {
-        EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
-        EntityManager manager = factoriaSession.createEntityManager();
+//        EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
+//        EntityManager manager = factoriaSession.createEntityManager();
+        EntityManager manager = getEntityManagerFactory().createEntityManager();
         EntityTransaction tx = null;
         try {
             tx = manager.getTransaction();
@@ -64,8 +69,9 @@ public abstract class GenericDAOJPAImpl<T, Id extends Serializable> implements G
 
     @Override
     public void borrar(T objeto) {
-        EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
-        EntityManager manager = factoriaSession.createEntityManager();
+//        EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
+//        EntityManager manager = factoriaSession.createEntityManager();
+        EntityManager manager = getEntityManagerFactory().createEntityManager();
         EntityTransaction tx = null;
         try {
             tx = manager.getTransaction();
@@ -83,8 +89,9 @@ public abstract class GenericDAOJPAImpl<T, Id extends Serializable> implements G
 
     @Override
     public void insertar(T objeto) {
-        EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
-        EntityManager manager = factoriaSession.createEntityManager();
+//        EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
+//        EntityManager manager = factoriaSession.createEntityManager();
+        EntityManager manager = getEntityManagerFactory().createEntityManager();
         EntityTransaction tx = null;
         try {
             tx = manager.getTransaction();
@@ -94,5 +101,13 @@ public abstract class GenericDAOJPAImpl<T, Id extends Serializable> implements G
         } catch (PersistenceException e) {
             tx.rollback();
         }
+    }
+
+    public EntityManagerFactory getEntityManagerFactory() {
+        return entityManagerFactory;
+    }
+
+    public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
     }
 }

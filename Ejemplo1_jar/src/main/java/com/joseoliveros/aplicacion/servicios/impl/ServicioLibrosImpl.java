@@ -1,4 +1,4 @@
-package com.joseoliveros.aplicacion.servicios;
+package com.joseoliveros.aplicacion.servicios.impl;
 
 import com.joseoliveros.aplicacion.bo.Categoria;
 import com.joseoliveros.aplicacion.bo.Libro;
@@ -6,6 +6,9 @@ import com.joseoliveros.aplicacion.dao.CategoriaDAO;
 import com.joseoliveros.aplicacion.dao.DAOAbstractFactory;
 import com.joseoliveros.aplicacion.dao.DAOFactory;
 import com.joseoliveros.aplicacion.dao.LibroDAO;
+import com.joseoliveros.aplicacion.servicios.ServicioLibros;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
 
@@ -14,10 +17,21 @@ public class ServicioLibrosImpl implements ServicioLibros {
     private LibroDAO libroDAO = null;
     private CategoriaDAO categoriaDAO = null;
 
+    // NO hace falta inicializar estos beans en el constructor, ya que ahora se hacen a nivel de la clase Acción
+
     public ServicioLibrosImpl() {
-        DAOFactory factory = DAOAbstractFactory.getInstance();
-        libroDAO = factory.getLibroDAO();
-        categoriaDAO = factory.getCategoriaDAO();
+//        DAOFactory factory = DAOAbstractFactory.getInstance();
+//        libroDAO = factory.getLibroDAO();
+//        categoriaDAO = factory.getCategoriaDAO();
+//        ApplicationContext context = new ClassPathXmlApplicationContext("applicationcontext.xml");
+//        libroDAO = (LibroDAO) context.getBean("libroDAO");
+//        categoriaDAO = (CategoriaDAO) context.getBean("categoriaDAO");
+//        System.out.println("Obteniendo beans a traves del contexto de Spring");
+    }
+
+    @Override
+    public void insertarLibro(Libro libro) {
+        libroDAO.insertar(libro);
     }
 
     @Override
@@ -54,5 +68,25 @@ public class ServicioLibrosImpl implements ServicioLibros {
     public List<Libro> buscarLibrosPorCategoria(int categoriaId) {
         Categoria categoria = categoriaDAO.buscarPorClave(categoriaId);
         return libroDAO.buscarPorCategoria(categoria);
+    }
+
+    @Override
+    public LibroDAO getLibroDao() {
+        return libroDAO;
+    }
+
+    @Override
+    public void setLibroDAO(LibroDAO libroDAO) {
+        this.libroDAO = libroDAO;
+    }
+
+    @Override
+    public CategoriaDAO getCategoriaDao() {
+        return categoriaDAO;
+    }
+
+    @Override
+    public void setCategoriaDAO(CategoriaDAO categoriaDAO) {
+        this.categoriaDAO = categoriaDAO;
     }
 }
