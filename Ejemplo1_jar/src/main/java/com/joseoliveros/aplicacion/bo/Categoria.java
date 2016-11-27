@@ -27,6 +27,11 @@ public class Categoria {
         this.id = id;
     }
 
+    public Categoria(int id, String descripcion) {
+        this.id = id;
+        this.descripcion = descripcion;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -65,24 +70,6 @@ public class Categoria {
 
     public void setListaDeLibros(List<Libro> listaDeLibros) {
         this.listaDeLibros = listaDeLibros;
-    }
-
-    public static List<Categoria> buscarTodos() {
-        SessionFactory factory = HibernateHelper.getSessionFactory();
-        Session session = factory.openSession();
-        List<Categoria> listaDeCategorias = session.createQuery("from Categoria categoria").list();
-        session.close();
-        return listaDeCategorias;
-    }
-
-    public static Categoria buscarPorClave(int id) {
-        SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        Query consulta = session.createQuery("from Categoria categoria where id=:id");
-        consulta.setParameter("id", id);
-        Categoria categoria = (Categoria) consulta.getSingleResult();
-        session.close();
-        return categoria;
     }
 
     @Override

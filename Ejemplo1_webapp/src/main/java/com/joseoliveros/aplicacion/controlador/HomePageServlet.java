@@ -1,4 +1,4 @@
-package com.joseoliveros.aplicacion.bo.aplicacion;
+package com.joseoliveros.aplicacion.controlador;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

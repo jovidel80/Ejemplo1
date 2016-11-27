@@ -1,7 +1,11 @@
-package com.joseoliveros.aplicacion.bo.aplicacion.controlador.acciones;
+package com.joseoliveros.aplicacion.controlador.acciones;
 
 import com.joseoliveros.aplicacion.bo.Categoria;
 import com.joseoliveros.aplicacion.bo.Libro;
+import com.joseoliveros.aplicacion.dao.CategoriaDAO;
+import com.joseoliveros.aplicacion.dao.LibroDAO;
+import com.joseoliveros.aplicacion.dao.jpa.CategoriaDAOJPAImpl;
+import com.joseoliveros.aplicacion.dao.jpa.LibroDAOJPAImpl;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +19,10 @@ public class FormularioEditarLibroAccion extends Accion {
     public String ejecutar(HttpServletRequest request, HttpServletResponse response) {
         log.info("Ejecutanto FormularioEditarLibroAccion...");
         String isbn = request.getParameter("isbn");
-        List<Categoria> listaDeCategorias = Categoria.buscarTodos();
-        Libro libro = Libro.buscarPorClave(isbn);
+        LibroDAO libroDAO = new LibroDAOJPAImpl();
+        CategoriaDAO categoriaDAO = new CategoriaDAOJPAImpl();
+        List<Categoria> listaDeCategorias = categoriaDAO.buscarTodos();
+        Libro libro = libroDAO.buscarPorClave(isbn);
         request.setAttribute("listaDeCategorias", listaDeCategorias);
         request.setAttribute("libro", libro);
         log.info("Retornando FormularioEditarLibro.jsp");

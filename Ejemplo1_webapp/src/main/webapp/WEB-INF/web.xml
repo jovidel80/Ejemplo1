@@ -7,15 +7,15 @@
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
     <servlet-name>ControladorLibros</servlet-name>
-    <servlet-class>com.joseoliveros.aplicacion.bo.aplicacion.ControladorLibros</servlet-class>
+    <servlet-class>com.joseoliveros.aplicacion.controlador.ControladorLibros</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>ServletTest</servlet-name>
-    <servlet-class>com.joseoliveros.aplicacion.bo.aplicacion.ServletTest</servlet-class>
+    <servlet-class>com.joseoliveros.aplicacion.controlador.ServletTest</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>HomePageServlet</servlet-name>
-    <servlet-class>com.joseoliveros.aplicacion.bo.aplicacion.HomePageServlet</servlet-class>
+    <servlet-class>com.joseoliveros.aplicacion.controlador.HomePageServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ControladorLibros</servlet-name>

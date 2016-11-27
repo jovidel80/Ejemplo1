@@ -9,11 +9,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-    Libro libro = null;
-        libro = Libro.buscarPorClave(request.getParameter("isbn"));
-    List<String> listaDeCategorias = Libro.buscarTodasLasCategoria();
-%>
+
 <html>
 <head>
     <title>Editar Libro</title>

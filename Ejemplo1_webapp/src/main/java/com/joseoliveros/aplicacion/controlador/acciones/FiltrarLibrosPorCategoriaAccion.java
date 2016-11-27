@@ -1,7 +1,11 @@
-package com.joseoliveros.aplicacion.bo.aplicacion.controlador.acciones;
+package com.joseoliveros.aplicacion.controlador.acciones;
 
 import com.joseoliveros.aplicacion.bo.Categoria;
 import com.joseoliveros.aplicacion.bo.Libro;
+import com.joseoliveros.aplicacion.dao.CategoriaDAO;
+import com.joseoliveros.aplicacion.dao.LibroDAO;
+import com.joseoliveros.aplicacion.dao.jpa.CategoriaDAOJPAImpl;
+import com.joseoliveros.aplicacion.dao.jpa.LibroDAOJPAImpl;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,14 +18,16 @@ public class FiltrarLibrosPorCategoriaAccion extends Accion {
 
     public String ejecutar(HttpServletRequest request, HttpServletResponse response) {
         log.info("Ejecutanto FiltrarLibrosPorCategoriaAccion...");
+        LibroDAO libroDAO = new LibroDAOJPAImpl();
+        CategoriaDAO categoriaDAO = new CategoriaDAOJPAImpl();
         List<Libro> listaDeLibros = null;
-        List<Categoria> listaDeCategorias = Categoria.buscarTodos();
+        List<Categoria> listaDeCategorias = categoriaDAO.buscarTodos();
         if (request.getParameter("categoria") == null ||
                 request.getParameter("categoria").equals("seleccionar")) {
-            listaDeLibros = Libro.buscarTodos();
+            listaDeLibros = libroDAO.buscarTodos();
         } else {
-            Categoria categoriaSeleccionada = Categoria.buscarPorClave(Integer.parseInt(request.getParameter("categoria")));
-            listaDeLibros = Libro.buscarPorCategoria(categoriaSeleccionada);
+            Categoria categoriaSeleccionada = categoriaDAO.buscarPorClave(Integer.parseInt(request.getParameter("categoria")));
+            listaDeLibros = libroDAO.buscarPorCategoria(categoriaSeleccionada);
         }
         request.setAttribute("listaDeLibros", listaDeLibros);
         request.setAttribute("listaDeCategorias", listaDeCategorias);

@@ -1,4 +1,4 @@
-package com.joseoliveros.aplicacion.bo.aplicacion.controlador.acciones;
+package com.joseoliveros.aplicacion.controlador.acciones;
 
 import org.apache.log4j.Logger;
 

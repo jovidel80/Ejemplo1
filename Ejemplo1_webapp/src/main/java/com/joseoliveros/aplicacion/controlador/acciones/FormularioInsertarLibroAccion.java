@@ -1,7 +1,8 @@
-package com.joseoliveros.aplicacion.bo.aplicacion.controlador.acciones;
+package com.joseoliveros.aplicacion.controlador.acciones;
 
 import com.joseoliveros.aplicacion.bo.Categoria;
-import com.joseoliveros.aplicacion.bo.Libro;
+import com.joseoliveros.aplicacion.dao.CategoriaDAO;
+import com.joseoliveros.aplicacion.dao.jpa.CategoriaDAOJPAImpl;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +15,8 @@ public class FormularioInsertarLibroAccion extends Accion {
 
     public String ejecutar(HttpServletRequest request, HttpServletResponse response) {
         log.info("Ejecutanto FormularioInsertarLibroAccion...");
-        List<Categoria> listaDeCategorias = Categoria.buscarTodos();
+        CategoriaDAO categoriaDAO = new CategoriaDAOJPAImpl();
+        List<Categoria> listaDeCategorias = categoriaDAO.buscarTodos();
         request.setAttribute("listaDeCategorias", listaDeCategorias);
 
         log.info("FormularioInsertarLibro.jsp");
