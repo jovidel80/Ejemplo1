@@ -3,13 +3,9 @@ package com.joseoliveros.aplicacion.servicios.impl;
 import com.joseoliveros.aplicacion.bo.Categoria;
 import com.joseoliveros.aplicacion.bo.Libro;
 import com.joseoliveros.aplicacion.dao.CategoriaDAO;
-import com.joseoliveros.aplicacion.dao.DAOAbstractFactory;
-import com.joseoliveros.aplicacion.dao.DAOFactory;
 import com.joseoliveros.aplicacion.dao.LibroDAO;
 import com.joseoliveros.aplicacion.servicios.ServicioLibros;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

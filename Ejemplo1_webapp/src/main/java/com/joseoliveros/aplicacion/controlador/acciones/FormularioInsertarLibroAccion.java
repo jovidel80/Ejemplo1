@@ -2,7 +2,6 @@ package com.joseoliveros.aplicacion.controlador.acciones;
 
 import com.joseoliveros.aplicacion.bo.Categoria;
 import com.joseoliveros.aplicacion.servicios.ServicioLibros;
-import com.joseoliveros.aplicacion.servicios.impl.ServicioLibrosImpl;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;

@@ -15,11 +15,20 @@
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
-
   <servlet>
-    <servlet-name>ControladorLibros</servlet-name>
-    <servlet-class>com.joseoliveros.aplicacion.controlador.ControladorLibros</servlet-class>
+    <servlet-name>Faces Servlet</servlet-name> 
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
   </servlet>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>/faces/*</url-pattern>
+  </servlet-mapping>
+
+  <!--<servlet>-->
+    <!--<servlet-name>ControladorLibros</servlet-name>-->
+    <!--<servlet-class>com.joseoliveros.aplicacion.controlador.ControladorLibros</servlet-class>-->
+  <!--</servlet>-->
   <servlet>
     <servlet-name>ServletTest</servlet-name>
     <servlet-class>com.joseoliveros.aplicacion.controlador.ServletTest</servlet-class>
@@ -28,10 +37,10 @@
     <servlet-name>HomePageServlet</servlet-name>
     <servlet-class>com.joseoliveros.aplicacion.controlador.HomePageServlet</servlet-class>
   </servlet>
-  <servlet-mapping>
-    <servlet-name>ControladorLibros</servlet-name>
-    <url-pattern>*.do</url-pattern>
-  </servlet-mapping>
+  <!--<servlet-mapping>-->
+    <!--<servlet-name>ControladorLibros</servlet-name>-->
+    <!--<url-pattern>*.do</url-pattern>-->
+  <!--</servlet-mapping>-->
   <servlet-mapping>
     <servlet-name>ServletTest</servlet-name>
     <url-pattern>*.hacer</url-pattern>
